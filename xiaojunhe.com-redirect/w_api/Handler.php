@@ -55,14 +55,19 @@ class Handler
 		{
 			/**
 			 * Might have the mobile cookie, and just need to get redirected to mobile file on disk
+			 * For dynamic mobile page, always let dynamic page handle it.
 			 */
-			if ( $this->request['mobile'] === true && file_exists( \BASE_DOCROOT_DIR . '/mobile/' . $this->request['file'] ) === true )
-			{
+			if (
+				$this->request['mobile'] === true &&
+				file_exists( \BASE_DOCROOT_DIR . '/mobile/' . $this->request['file'] ) === true
+			) {
 				\setcookie( 'is_mobile', 1, time( ) + 2592000, '/' );
-				\Output::sendHeader( 'Location: ' . $this->request['file'] );
-				$this->isRedirect = true;
-				$this->finalizeOutput();
-				exit( );
+				if ($this->isDynamicPage() === false) {
+					\Output::sendHeader('Location: ' . $this->request['file']);
+					$this->isRedirect = true;
+					$this->finalizeOutput();
+					exit();
+				}
 			}
 
 			/**
@@ -284,7 +289,7 @@ class Handler
 			 * or if it is the base directory for a blog (meaning the base directory is also a file in published data)
 			 */
 			if ( $this->isDynamicRoute( $this->request['directories'][0] ) ||
-				( is_numeric( $this->request['directories'][0] ) === true && isset( $this->request['directories'][0]{1} ) === false )
+				( is_numeric( $this->request['directories'][0] ) === true )
 			)
 			{
 				return true;
