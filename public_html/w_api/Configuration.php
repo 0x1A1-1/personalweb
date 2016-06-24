@@ -11,10 +11,10 @@
  */
 class Configuration
 {
-	const RESELLER_REQUEST_SECRET = '1feeef8c2e2d68f85c3d272ddc1fc730c6c346453ffdfceb0392413e5f066a7b';
+	const RESELLER_REQUEST_SECRET = '1c6d47ad92ee837b0e5ef83a8235a5251ed5a1a9c69188555c7d71db8538008a';
 	const ERROR_REPORTING_LEVEL = 0;
 	const DEPLOYED_HOSTNAME = 'xiaojunhe.com';
-	const BUILDDATE = 1454968118;
+	const BUILDDATE = 1457325970;
 	const DEPLOYED_REPOSITORY = 'live';
 	const ORIGIN_API_ENDPOINT = 'https://api.weeblycloud.com/private/';
 	const CLIENT_API_ENDPOINT = 'http://pages.weebly.com/';
